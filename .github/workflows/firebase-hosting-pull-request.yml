@@ -1,6 +1,11 @@
-name: Firebase Hosting Pull Request Preview
+on:
+
+name: Firebase Hosting Deploy
 
 on:
+  push:
+    branches:
+      - main
   pull_request:
     types: [opened, synchronize, reopened]
 
