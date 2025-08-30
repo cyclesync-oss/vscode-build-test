@@ -1,0 +1,43 @@
+type User @table {
+  email: String!
+  passwordHash: String!
+  createdAt: Timestamp!
+  lastLoginAt: Timestamp
+}
+
+type Cycle @table {
+  user: User!
+  startDate: Date!
+  endDate: Date
+  flowIntensity: String!
+  createdAt: Timestamp!
+}
+
+type SymptomLog @table {
+  user: User!
+  cycle: Cycle
+  logDate: Date!
+  crampsSeverity: Int!
+  mood: String!
+  energyLevel: Int!
+  sleepQuality: Int!
+  createdAt: Timestamp!
+}
+
+type Note @table {
+  user: User!
+  symptomLog: SymptomLog
+  noteDate: Date!
+  content: String!
+  createdAt: Timestamp!
+  tags: [String]
+}
+
+type Recommendation @table {
+  user: User!
+  recommendationDate: Date!
+  content: String!
+  category: String!
+  createdAt: Timestamp!
+  cyclePhase: String
+}

@@ -1,0 +1,36 @@
+mutation CreateSymptomLog @auth(level: USER) {
+  symptomLog_insert(data: {
+    userId_expr: "auth.uid",
+    crampsSeverity: 3,
+    energyLevel: 3,
+    logDate_expr: "request.time",
+    mood: "Neutral",
+    sleepQuality: 3
+  })
+}
+
+query GetMySymptomLogs @auth(level: USER) {
+  symptomLogs(where: {userId: {eq_expr: "auth.uid"}}) {
+    id
+    logDate
+    mood
+    energyLevel
+    crampsSeverity
+  }
+}
+
+mutation CreateNote @auth(level: USER) {
+  note_insert(data: {
+    userId_expr: "auth.uid",
+    content: "Feeling okay today",
+    noteDate_expr: "request.time"
+  })
+}
+
+query GetMyNotes @auth(level: USER) {
+  notes(where: {userId: {eq_expr: "auth.uid"}}) {
+    id
+    noteDate
+    content
+  }
+}

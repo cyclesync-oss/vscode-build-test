@@ -1,0 +1,92 @@
+mutation SeedData @auth(level: USER) {
+  user_upsertMany(data: [
+    {
+      id: "550e8400-e29b-41d4-a716-446655440000",
+      email: "test@example.com",
+      passwordHash: "somehash",
+      createdAt: "2024-01-01T00:00:00Z"
+    },
+    {
+      id: "550e8400-e29b-41d4-a716-446655440001",
+      email: "test2@example.com",
+      passwordHash: "someotherhash",
+      createdAt: "2024-01-02T00:00:00Z"
+    }
+  ])
+  cycle_upsertMany(data: [
+    {
+      id: "650e8400-e29b-41d4-a716-446655440000",
+      userId: "550e8400-e29b-41d4-a716-446655440000",
+      startDate: "2024-02-01",
+      flowIntensity: "light",
+      createdAt: "2024-02-01T00:00:00Z"
+    },
+    {
+      id: "650e8400-e29b-41d4-a716-446655440001",
+      userId: "550e8400-e29b-41d4-a716-446655440001",
+      startDate: "2024-02-05",
+      flowIntensity: "medium",
+      createdAt: "2024-02-05T00:00:00Z"
+    }
+  ])
+  symptomLog_upsertMany(data: [
+    {
+      id: "750e8400-e29b-41d4-a716-446655440000",
+      cycleId: "650e8400-e29b-41d4-a716-446655440000",
+      userId: "550e8400-e29b-41d4-a716-446655440000",
+      logDate: "2024-02-02",
+      mood: "happy",
+      energyLevel: 5,
+      sleepQuality: 4,
+      crampsSeverity: 2,
+      createdAt: "2024-02-02T00:00:00Z"
+    },
+    {
+      id: "750e8400-e29b-41d4-a716-446655440001",
+      cycleId: "650e8400-e29b-41d4-a716-446655440001",
+      userId: "550e8400-e29b-41d4-a716-446655440001",
+      logDate: "2024-02-06",
+      mood: "sad",
+      energyLevel: 2,
+      sleepQuality: 2,
+      crampsSeverity: 4,
+      createdAt: "2024-02-06T00:00:00Z"
+    }
+  ])
+  note_upsertMany(data: [
+    {
+      id: "850e8400-e29b-41d4-a716-446655440000",
+      symptomLogId: "750e8400-e29b-41d4-a716-446655440000",
+      userId: "550e8400-e29b-41d4-a716-446655440000",
+      noteDate: "2024-02-02",
+      content: "Feeling good today",
+      createdAt: "2024-02-02T00:00:00Z"
+    },
+    {
+      id: "850e8400-e29b-41d4-a716-446655440001",
+      symptomLogId: "750e8400-e29b-41d4-a716-446655440001",
+      userId: "550e8400-e29b-41d4-a716-446655440001",
+      noteDate: "2024-02-06",
+      content: "Not feeling so great",
+      createdAt: "2024-02-06T00:00:00Z"
+    }
+  ])
+  recommendation_upsertMany(data: [
+    {
+      id: "950e8400-e29b-41d4-a716-446655440000",
+      userId: "550e8400-e29b-41d4-a716-446655440000",
+      recommendationDate: "2024-02-02",
+      category: "exercise",
+      content: "Go for a walk",
+      createdAt: "2024-02-02T00:00:00Z"
+    },
+    {
+      id: "950e8400-e29b-41d4-a716-446655440001",
+      userId: "550e8400-e29b-41d4-a716-446655440001",
+      recommendationDate: "2024-02-06",
+      category: "rest",
+      content: "Take it easy",
+      createdAt: "2024-02-06T00:00:00Z"
+    }
+  ])
+}
