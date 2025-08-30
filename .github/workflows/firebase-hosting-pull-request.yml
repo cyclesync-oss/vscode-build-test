@@ -19,14 +19,14 @@ jobs:
       - name: Install Firebase CLI
         run: npm install -g firebase-tools
 
-      - name: Write service account to file
-        run: echo "$FIREBASE_SERVICE_ACCOUNT" > ${HOME}/gcloud.json
-        env:
-          FIREBASE_SERVICE_ACCOUNT: ${{ secrets.FIREBASE_SERVICE_ACCOUNT }}
+
+      - name: Authenticate to Firebase
+        uses: google-github-actions/auth@v2
+        with:
+          credentials_json: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_LUNAR_LOGIC_UEAFR }}
 
       - name: Firebase Hosting Preview
         run: |
-          firebase --project $FIREBASE_PROJECT_ID hosting:channel:deploy pr-${{ github.event.pull_request.number }} --json --token "$(cat ${HOME}/gcloud.json)"
+          firebase --project $FIREBASE_PROJECT_ID hosting:channel:deploy pr-${{ github.event.pull_request.number }} --json
         env:
           FIREBASE_PROJECT_ID: ${{ secrets.FIREBASE_PROJECT_ID }}
-          FIREBASE_SERVICE_ACCOUNT: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_LUNAR_LOGIC_UEAFR }}
